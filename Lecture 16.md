@@ -8,9 +8,6 @@
 
 ex)위 문장에서 같은 entity를 언급하는 것은 Barack Obama, his, he
 
-* Why is Coreference Resolution useful?
-
-
 ### 2. Coreference Resolution in Two Steps
 (1) Detect the mentions
 "I Voted for Nader because he was most aligned with my values," she said
@@ -45,27 +42,21 @@ tree도 mention이 됨
 - No student -> 마찬가지로 아무 것도 의미하지 않음(존재하지 않기 때문)
 - The best donut in the world -> 불명확, 
 최고의 도넛 무엇이냐에 대한 논쟁이라면 reference가 있다고 말할 수 있지만 최고의 도넛을 찾고 있다면 reference가 존재하지 않는다.
-- 100 miles
-quantity를 나타내는 것도 reference가 존재하지 않음
+- 100 miles -> quantity를 나타내는 것도 reference가 존재하지 않음
 
 ##### (4) How to deal with these bad mentions?
-- bad mentions를 필터링하도록 classifier를 train
-classifier는 mention된 것과 아닌 것을 분류
+- bad mentions를 필터링하도록 classifier를 train, classifier는 mention된 것과 아닌 것을 분류
 
-- 하지만 사람들은 대부분 모든 candidate mentions를 찾음
--> why? 효과가 좋은 것으로 밝혀짐
- 모든 mention을 찾은 후에 핵심적인 mention을 찾기 위해 clustering을 사용
+- 하지만 사람들은 위 단계를 skip하고 대부분 모든 candidate mentions를 찾음
+-> why? 효과가 좋은 것으로 밝혀짐. 모든 mention을 찾은 후에 핵심적인 mention을 찾기 위해 clustering을 사용
 if) 'No stuendt' 같은 mentnion이 나오면 다른 것들과 clustering 시키지 않음
 
 
 ##### (5) Can we avoid a pipelined system?
-part of speech, NER, parser, named mention detector coref clustering system 이게 five-step pipeline
-이건 traditional한 방법, coreference resolution의 전부
-
-2016년 pipeline이 등장하기 전에
-우린 강의 마지막 부분에 다룰 것이다.
-어떤 파이프라인 스텝없이 coref cluster를 하는 end-to-end coreference system을 build할 수 있을까?
-이걸 강의 마지막 부분에 보여준다고 합니다.
+part of speech, NER, parser, named mention detector 등이 pipeline
+이건 traditional한 방법, 2016년 pipeline이 등장하기 전까지 coreference system의 모든 system
+파이프라인없이 coref cluster를 하는 end-to-end coreference system을 build할 수 있을까?
+강의 마지막 부분에서 설명
 
 ### 4. On to Coreference! First, some linguistics
 
@@ -81,6 +72,7 @@ anaphor란 다른 표현, 대개는 그 글에서 이전에 나왔던 표현에�
 ##### (2) Anaphora vs Coreference
 모든 anaphoric relations가 coreferential한 건 아니다.
 ![](2020-12-03-22-48-34.png)
+23
 
 a concert와 The tickets는 anaphoric relationship이다.
 But, 명백하게 다른 entity이므로 coreference relationship은 아니다.
@@ -181,13 +173,13 @@ word embedding과 categorical feature를 input으로 하여 score 계산
 목표: end-to-end coreference system의 생성
 ![](2020-12-05-23-50-58.png)
 
-각 단어마다, 해당 단어를 포함하는 단어를 찾는다. 매트릭스와 캐릭터 레벨 CNN을 포함하는 단어를 연결하세요. 이것은 각 토큰을 나타냅니다.
-그 다음 스텝에서 Bidirectional LSTM을 실행한다. .
-그래서 그 이후에 그들이 하고 싶었던 것은 스팬에 대한 표현입니다.
-그래서 스팬으로, 우리는 문장의 연속적인 하위 구절을 의미합니다.
-그들은 스팬 표현을 하고 싶어합니다.
+각 단어마다 word embedding을 한다. 
+매트릭스와 캐릭터 레벨 CNN을 포함하는 단어를 연결하여 각 토큰을 나타낸다.
+그 다음 스텝에서 Bidirectional LSTM을 실행한다.
+그래서 그 이후에 스팬에 대한 표현을 한다.
 이 스팬 표현은 세 부분으로 나눌 것입니다.
 ![](2020-12-05-23-58-41.png)
+
 마지막꺼는 additional features라고 해서
 speaker와 adress에 표시를 한다.
 grammatical한 역할처럼 text안에서 발견할 수 없는 것을 표시한다.
