@@ -121,7 +121,7 @@ NP Niall Ferguson이 선행사)
 ![](2020-12-05-17-13-49.png)
 
 
- Binary Classifier의 결과값은, 두 mention이 coreferent 하다면 1을, coreferent 하지 않다면 0의 값을 내보낸다.
+ Binary Classifier의 결과값은, 두 mention이 coreferent 하다면 1을, coreferent 하지 않다면 -1값을 내보낸다.
 
 p(mj, mi) = Coreferent할 확률을 예측하는 model
 cross entropy loss를 사용하여 학습
