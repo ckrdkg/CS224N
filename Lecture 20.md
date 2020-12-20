@@ -41,8 +41,7 @@ Using unlabeled data to improve machine translation models.
 
 - encoder, decoder를 먼저 따로 train
 - 2가지를 같이 train
-- encoder를 source side language에 대해 train된 언어 모델의 가중치로 초기화
-- decoder를 target size language에 대해 train된 가중치로 초기화
+- 각각 pre-train된 LM을 초기값으로 사용
   
 이 모델은 모델 performance를 향상시킨다
 
